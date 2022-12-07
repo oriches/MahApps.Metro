@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Controls;
-using ControlzEx.Standard;
+using Windows.Win32;
 using MahApps.Metro.ValueBoxes;
 
 namespace MahApps.Metro.Controls
@@ -21,11 +21,19 @@ namespace MahApps.Metro.Controls
             = DependencyProperty.Register(nameof(HotKey),
                                           typeof(HotKey),
                                           typeof(HotKeyBox),
-                                          new FrameworkPropertyMetadata(default(HotKey), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnHotKeyPropertyChanged));
+                                          new FrameworkPropertyMetadata(default(HotKey?), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnHotKeyPropertyChanged));
 
         private static void OnHotKeyPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            (d as HotKeyBox)?.UpdateText();
+            if (d is HotKeyBox hotKeyBox)
+            {
+                if (e.OldValue != e.NewValue)
+                {
+                    hotKeyBox.RaiseEvent(new RoutedPropertyChangedEventArgs<HotKey?>(e.OldValue as HotKey, e.NewValue as HotKey, HotKeyChangedEvent));
+                }
+
+                hotKeyBox.UpdateText();
+            }
         }
 
         /// <summary>
@@ -69,6 +77,23 @@ namespace MahApps.Metro.Controls
         {
             get => (string?)this.GetValue(TextProperty);
             protected set => this.SetValue(TextPropertyKey, value);
+        }
+
+        /// <summary>Identifies the <see cref="HotKeyChanged"/> routed event.</summary>
+        public static readonly RoutedEvent HotKeyChangedEvent
+            = EventManager.RegisterRoutedEvent(nameof(HotKeyChanged),
+                                               RoutingStrategy.Bubble,
+                                               typeof(RoutedPropertyChangedEventHandler<HotKey?>),
+                                               typeof(HotKeyBox));
+
+        /// <summary>
+        /// Add / Remove HotKeyChangedEvent handler
+        /// Event which will be fired from this HotKeyBox when its value has been changed.
+        /// </summary>
+        public event RoutedPropertyChangedEventHandler<HotKey?> HotKeyChanged
+        {
+            add => this.AddHandler(HotKeyChangedEvent, value);
+            remove => this.RemoveHandler(HotKeyChangedEvent, value);
         }
 
         private TextBox? _textBox;
@@ -139,16 +164,14 @@ namespace MahApps.Metro.Controls
             ComponentDispatcher.ThreadPreprocessMessage += this.ComponentDispatcherOnThreadPreprocessMessage;
         }
 
-#pragma warning disable 618
         private void ComponentDispatcherOnThreadPreprocessMessage(ref MSG msg, ref bool handled)
         {
-            if (msg.message == (int)WM.HOTKEY)
+            if (msg.message == PInvoke.WM_HOTKEY)
             {
                 // swallow all hotkeys, so our control can catch the key strokes
                 handled = true;
             }
         }
-#pragma warning restore 618
 
         private void TextBoxOnLostFocus(object sender, RoutedEventArgs routedEventArgs)
         {
@@ -215,8 +238,8 @@ namespace MahApps.Metro.Controls
 
         private void UpdateText()
         {
-            var hotkey = this.HotKey;
-            this.Text = hotkey is null || hotkey.Key == Key.None ? string.Empty : hotkey.ToString();
+            var hotKey = this.HotKey;
+            this.SetValue(HotKeyBox.TextPropertyKey, hotKey is null || hotKey.Key == Key.None ? string.Empty : hotKey.ToString());
         }
     }
 }

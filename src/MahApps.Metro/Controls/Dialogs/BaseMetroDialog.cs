@@ -83,16 +83,16 @@ namespace MahApps.Metro.Controls.Dialogs
         /// <summary>Identifies the <see cref="Title"/> dependency property.</summary>
         public static readonly DependencyProperty TitleProperty
             = DependencyProperty.Register(nameof(Title),
-                                          typeof(string),
+                                          typeof(object),
                                           typeof(BaseMetroDialog),
-                                          new PropertyMetadata(default(string)));
+                                          new PropertyMetadata(default(object)));
 
         /// <summary>
         /// Gets or sets the title of the dialog.
         /// </summary>
-        public string? Title
+        public object? Title
         {
-            get => (string?)this.GetValue(TitleProperty);
+            get => (object?)this.GetValue(TitleProperty);
             set => this.SetValue(TitleProperty, value);
         }
 
@@ -394,10 +394,10 @@ namespace MahApps.Metro.Controls.Dialogs
             if (this.ParentDialogWindow != null)
             {
                 this.ParentDialogWindow.SetCurrentValue(BackgroundProperty, this.Background);
-                var glowBrush = TryGetResource(theme, "MahApps.Brushes.Dialog.Glow");
-                if (glowBrush != null)
+                var glowColor = TryGetResource(theme, "MahApps.Colors.Accent");
+                if (glowColor != null)
                 {
-                    this.ParentDialogWindow.SetCurrentValue(MetroWindow.GlowBrushProperty, glowBrush);
+                    this.ParentDialogWindow.SetCurrentValue(MetroWindow.GlowColorProperty, glowColor);
                 }
             }
         }

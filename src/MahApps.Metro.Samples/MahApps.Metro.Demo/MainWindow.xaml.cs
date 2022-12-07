@@ -273,18 +273,25 @@ namespace MetroDemo
 
         private async void ShowAwaitCustomDialog(object sender, RoutedEventArgs e)
         {
+            var tcs = new TaskCompletionSource<bool>();
             var dialog = new CustomDialog(this.MetroDialogOptions) { Content = this.Resources["CustomCloseDialogTest"], Title = "Custom Dialog which is awaitable" };
-
+            dialog.Tag = tcs;
             await this.ShowMetroDialogAsync(dialog);
-            await dialog.WaitUntilUnloadedAsync();
+            await tcs.Task;
+            await this.HideMetroDialogAsync(dialog);
+            await this.ShowMessageAsync("Dialog gone", "The custom dialog is now closed.");
         }
 
-        private async void CloseCustomDialog(object sender, RoutedEventArgs e)
+        private async void ShowSecondCustomDialog(object sender, RoutedEventArgs e)
+        {
+            await this.ShowMessageAsync("Second Dialog", "The first custom dialog is now behind this dialog.");
+        }
+
+        private void CloseCustomDialog(object sender, RoutedEventArgs e)
         {
             var dialog = ((DependencyObject)sender).TryFindParent<BaseMetroDialog>()!;
-
-            await this.HideMetroDialogAsync(dialog);
-            await this.ShowMessageAsync("Dialog gone", "The custom dialog has closed");
+            var tcs = dialog.Tag as TaskCompletionSource<bool>;
+            tcs?.TrySetResult(true);
         }
 
         private async void ShowLoginDialogPasswordPreview(object sender, RoutedEventArgs e)
@@ -579,6 +586,8 @@ namespace MetroDemo
         {
             var w = this.GetTestWindow();
             w.Content = new TextBlock { Text = "MetroWindow with Border", FontSize = 28, FontWeight = FontWeights.Light, VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center };
+            w.GlowColor = null;
+            w.NonActiveGlowColor = null;
             w.Show();
         }
 
@@ -588,7 +597,7 @@ namespace MetroDemo
             w.Content = new Button { Content = "MetroWindow with Glow", ToolTip = "And test tool tip", FontSize = 28, FontWeight = FontWeights.Light, VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center };
             w.BorderThickness = new Thickness(1);
             w.BorderBrush = null;
-            w.SetResourceReference(GlowBrushProperty, "MahApps.Brushes.Accent");
+            w.SetResourceReference(GlowColorProperty, "MahApps.Colors.Accent");
             w.Show();
         }
 
@@ -598,7 +607,7 @@ namespace MetroDemo
             w.Content = new TextBlock { Text = "Window with drop shadow", FontSize = 28, FontWeight = FontWeights.Light, VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center };
             w.BorderThickness = new Thickness(0);
             w.BorderBrush = null;
-            w.GlowBrush = Brushes.Black;
+            w.GlowColor = Colors.Black;
             w.Show();
         }
     }

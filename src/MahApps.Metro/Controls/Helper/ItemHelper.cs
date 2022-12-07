@@ -46,6 +46,38 @@ namespace MahApps.Metro.Controls
         }
 
         /// <summary>
+        /// Gets or sets the border brush which will be used for the active selected item (if the keyboard focus is within).
+        /// </summary>
+        public static readonly DependencyProperty ActiveSelectionBorderBrushProperty
+            = DependencyProperty.RegisterAttached(
+                "ActiveSelectionBorderBrush",
+                typeof(Brush),
+                typeof(ItemHelper),
+                new FrameworkPropertyMetadata(default(Brush), FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.Inherits));
+
+        /// <summary>
+        /// Gets the brush the border brush which will be used for the active selected item (if the keyboard focus is within).
+        /// </summary>
+        [Category(AppName.MahApps)]
+        [AttachedPropertyBrowsableForType(typeof(ListBoxItem))]
+        [AttachedPropertyBrowsableForType(typeof(TreeViewItem))]
+        public static Brush? GetActiveSelectionBorderBrush(UIElement element)
+        {
+            return (Brush?)element.GetValue(ActiveSelectionBorderBrushProperty);
+        }
+
+        /// <summary>
+        /// Sets the brush the border brush which will be used for the active selected item (if the keyboard focus is within).
+        /// </summary>
+        [Category(AppName.MahApps)]
+        [AttachedPropertyBrowsableForType(typeof(ListBoxItem))]
+        [AttachedPropertyBrowsableForType(typeof(TreeViewItem))]
+        public static void SetActiveSelectionBorderBrush(UIElement element, Brush? value)
+        {
+            element.SetValue(ActiveSelectionBorderBrushProperty, value);
+        }
+
+        /// <summary>
         /// Gets or sets the foreground brush which will be used for the active selected item (if the keyboard focus is within).
         /// </summary>
         public static readonly DependencyProperty ActiveSelectionForegroundBrushProperty
@@ -107,6 +139,38 @@ namespace MahApps.Metro.Controls
         public static void SetSelectedBackgroundBrush(UIElement element, Brush? value)
         {
             element.SetValue(SelectedBackgroundBrushProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the border brush which will be used for a selected item.
+        /// </summary>
+        public static readonly DependencyProperty SelectedBorderBrushProperty
+            = DependencyProperty.RegisterAttached(
+                "SelectedBorderBrush",
+                typeof(Brush),
+                typeof(ItemHelper),
+                new FrameworkPropertyMetadata(default(Brush), FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.Inherits));
+
+        /// <summary>
+        /// Gets the border brush which will be used for a selected item.
+        /// </summary>
+        [Category(AppName.MahApps)]
+        [AttachedPropertyBrowsableForType(typeof(ListBoxItem))]
+        [AttachedPropertyBrowsableForType(typeof(TreeViewItem))]
+        public static Brush? GetSelectedBorderBrush(UIElement element)
+        {
+            return (Brush?)element.GetValue(SelectedBorderBrushProperty);
+        }
+
+        /// <summary>
+        /// Sets the border brush which will be used for a selected item.
+        /// </summary>
+        [Category(AppName.MahApps)]
+        [AttachedPropertyBrowsableForType(typeof(ListBoxItem))]
+        [AttachedPropertyBrowsableForType(typeof(TreeViewItem))]
+        public static void SetSelectedBorderBrush(UIElement element, Brush? value)
+        {
+            element.SetValue(SelectedBorderBrushProperty, value);
         }
 
         /// <summary>
@@ -174,6 +238,38 @@ namespace MahApps.Metro.Controls
         }
 
         /// <summary>
+        /// Gets or sets the border brush which will be used for an mouse hovered item.
+        /// </summary>
+        public static readonly DependencyProperty HoverBorderBrushProperty
+            = DependencyProperty.RegisterAttached(
+                "HoverBorderBrush",
+                typeof(Brush),
+                typeof(ItemHelper),
+                new FrameworkPropertyMetadata(default(Brush), FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.Inherits));
+
+        /// <summary>
+        /// Gets the border brush which will be used for an mouse hovered item.
+        /// </summary>
+        [Category(AppName.MahApps)]
+        [AttachedPropertyBrowsableForType(typeof(ListBoxItem))]
+        [AttachedPropertyBrowsableForType(typeof(TreeViewItem))]
+        public static Brush? GetHoverBorderBrush(UIElement element)
+        {
+            return (Brush?)element.GetValue(HoverBorderBrushProperty);
+        }
+
+        /// <summary>
+        /// Sets the border brush which will be used for an mouse hovered item.
+        /// </summary>
+        [Category(AppName.MahApps)]
+        [AttachedPropertyBrowsableForType(typeof(ListBoxItem))]
+        [AttachedPropertyBrowsableForType(typeof(TreeViewItem))]
+        public static void SetHoverBorderBrush(UIElement element, Brush? value)
+        {
+            element.SetValue(HoverBorderBrushProperty, value);
+        }
+
+        /// <summary>
         /// Gets or sets the foreground brush which will be used for an mouse hovered item.
         /// </summary>
         public static readonly DependencyProperty HoverForegroundBrushProperty
@@ -235,6 +331,38 @@ namespace MahApps.Metro.Controls
         public static void SetHoverSelectedBackgroundBrush(UIElement element, Brush? value)
         {
             element.SetValue(HoverSelectedBackgroundBrushProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the border brush which will be used for an mouse hovered and selected item.
+        /// </summary>
+        public static readonly DependencyProperty HoverSelectedBorderBrushProperty
+            = DependencyProperty.RegisterAttached(
+                "HoverSelectedBorderBrush",
+                typeof(Brush),
+                typeof(ItemHelper),
+                new FrameworkPropertyMetadata(default(Brush), FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.Inherits));
+
+        /// <summary>
+        /// Gets the border brush which will be used for an mouse hovered and selected item.
+        /// </summary>
+        [Category(AppName.MahApps)]
+        [AttachedPropertyBrowsableForType(typeof(ListBoxItem))]
+        [AttachedPropertyBrowsableForType(typeof(TreeViewItem))]
+        public static Brush? GetHoverSelectedBorderBrush(UIElement element)
+        {
+            return (Brush?)element.GetValue(HoverSelectedBorderBrushProperty);
+        }
+
+        /// <summary>
+        /// Sets the border brush which will be used for an mouse hovered and selected item.
+        /// </summary>
+        [Category(AppName.MahApps)]
+        [AttachedPropertyBrowsableForType(typeof(ListBoxItem))]
+        [AttachedPropertyBrowsableForType(typeof(TreeViewItem))]
+        public static void SetHoverSelectedBorderBrush(UIElement element, Brush? value)
+        {
+            element.SetValue(HoverSelectedBorderBrushProperty, value);
         }
 
         /// <summary>
@@ -302,6 +430,38 @@ namespace MahApps.Metro.Controls
         }
 
         /// <summary>
+        /// Gets or sets the border brush which will be used for selected disabled items.
+        /// </summary>
+        public static readonly DependencyProperty DisabledSelectedBorderBrushProperty
+            = DependencyProperty.RegisterAttached(
+                "DisabledSelectedBorderBrush",
+                typeof(Brush),
+                typeof(ItemHelper),
+                new FrameworkPropertyMetadata(default(Brush), FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.Inherits));
+
+        /// <summary>
+        /// Gets the border brush which will be used for selected disabled items.
+        /// </summary>
+        [Category(AppName.MahApps)]
+        [AttachedPropertyBrowsableForType(typeof(ListBoxItem))]
+        [AttachedPropertyBrowsableForType(typeof(TreeViewItem))]
+        public static Brush? GetDisabledSelectedBorderBrush(UIElement element)
+        {
+            return (Brush?)element.GetValue(DisabledSelectedBorderBrushProperty);
+        }
+
+        /// <summary>
+        /// Sets the border brush which will be used for selected disabled items.
+        /// </summary>
+        [Category(AppName.MahApps)]
+        [AttachedPropertyBrowsableForType(typeof(ListBoxItem))]
+        [AttachedPropertyBrowsableForType(typeof(TreeViewItem))]
+        public static void SetDisabledSelectedBorderBrush(UIElement element, Brush? value)
+        {
+            element.SetValue(DisabledSelectedBorderBrushProperty, value);
+        }
+
+        /// <summary>
         /// Gets or sets the foreground brush which will be used for selected disabled items.
         /// </summary>
         public static readonly DependencyProperty DisabledSelectedForegroundBrushProperty
@@ -366,6 +526,38 @@ namespace MahApps.Metro.Controls
         }
 
         /// <summary>
+        /// Gets or sets the border brush which will be used for disabled items.
+        /// </summary>
+        public static readonly DependencyProperty DisabledBorderBrushProperty
+            = DependencyProperty.RegisterAttached(
+                "DisabledBorderBrush",
+                typeof(Brush),
+                typeof(ItemHelper),
+                new FrameworkPropertyMetadata(default(Brush), FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.Inherits));
+
+        /// <summary>
+        /// Gets the border brush which will be used for disabled items.
+        /// </summary>
+        [Category(AppName.MahApps)]
+        [AttachedPropertyBrowsableForType(typeof(ListBoxItem))]
+        [AttachedPropertyBrowsableForType(typeof(TreeViewItem))]
+        public static Brush? GetDisabledBorderBrush(UIElement element)
+        {
+            return (Brush?)element.GetValue(DisabledBorderBrushProperty);
+        }
+
+        /// <summary>
+        /// Sets the border brush which will be used for disabled items.
+        /// </summary>
+        [Category(AppName.MahApps)]
+        [AttachedPropertyBrowsableForType(typeof(ListBoxItem))]
+        [AttachedPropertyBrowsableForType(typeof(TreeViewItem))]
+        public static void SetDisabledBorderBrush(UIElement element, Brush? value)
+        {
+            element.SetValue(DisabledBorderBrushProperty, value);
+        }
+
+        /// <summary>
         /// Gets or sets the foreground brush which will be used for disabled items.
         /// </summary>
         public static readonly DependencyProperty DisabledForegroundBrushProperty
@@ -419,9 +611,9 @@ namespace MahApps.Metro.Controls
                 "MouseLeftButtonPressedBackgroundBrush",
                 typeof(Brush),
                 typeof(ItemHelper),
-                new FrameworkPropertyMetadata(default(Brush), FrameworkPropertyMetadataOptions.AffectsRender, OnMouseLeftButtonPressedBackgroundBrushPropertyChanged));
+                new FrameworkPropertyMetadata(default(Brush), FrameworkPropertyMetadataOptions.AffectsRender, OnMouseLeftButtonPressedPropertyChanged));
 
-        private static void OnMouseLeftButtonPressedBackgroundBrushPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnMouseLeftButtonPressedPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is UIElement element && e.OldValue != e.NewValue)
             {
@@ -430,7 +622,7 @@ namespace MahApps.Metro.Controls
                 element.MouseEnter -= OnLeftMouseEnter;
                 element.MouseLeave -= OnLeftMouseLeave;
 
-                if (e.NewValue is Brush || GetMouseLeftButtonPressedForegroundBrush(element) != null)
+                if (e.NewValue is Brush || GetMouseLeftButtonPressedForegroundBrush(element) != null || GetMouseLeftButtonPressedBorderBrush(element) != null)
                 {
                     element.PreviewMouseLeftButtonDown += OnPreviewMouseLeftButtonDown;
                     element.PreviewMouseLeftButtonUp += OnPreviewMouseLeftButtonUp;
@@ -499,6 +691,57 @@ namespace MahApps.Metro.Controls
         }
 
         /// <summary>
+        /// Gets or sets the border brush which will be used when an item is pressed by the left mouse button.
+        /// </summary>
+        public static readonly DependencyProperty MouseLeftButtonPressedBorderBrushProperty
+            = DependencyProperty.RegisterAttached(
+                "MouseLeftButtonPressedBorderBrush",
+                typeof(Brush),
+                typeof(ItemHelper),
+                new FrameworkPropertyMetadata(default(Brush), FrameworkPropertyMetadataOptions.AffectsRender, OnMouseLeftButtonPressedBorderPropertyChanged));
+
+        private static void OnMouseLeftButtonPressedBorderPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is UIElement element && e.OldValue != e.NewValue)
+            {
+                element.PreviewMouseLeftButtonDown -= OnPreviewMouseLeftButtonDown;
+                element.PreviewMouseLeftButtonUp -= OnPreviewMouseLeftButtonUp;
+                element.MouseEnter -= OnLeftMouseEnter;
+                element.MouseLeave -= OnLeftMouseLeave;
+
+                if (e.NewValue is Brush || GetMouseLeftButtonPressedForegroundBrush(element) != null || GetMouseLeftButtonPressedBackgroundBrush(element) != null)
+                {
+                    element.PreviewMouseLeftButtonDown += OnPreviewMouseLeftButtonDown;
+                    element.PreviewMouseLeftButtonUp += OnPreviewMouseLeftButtonUp;
+                    element.MouseEnter += OnLeftMouseEnter;
+                    element.MouseLeave += OnLeftMouseLeave;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the border brush which will be used when an item is pressed by the left mouse button.
+        /// </summary>
+        [Category(AppName.MahApps)]
+        [AttachedPropertyBrowsableForType(typeof(ListBoxItem))]
+        [AttachedPropertyBrowsableForType(typeof(TreeViewItem))]
+        public static Brush? GetMouseLeftButtonPressedBorderBrush(UIElement element)
+        {
+            return (Brush?)element.GetValue(MouseLeftButtonPressedBorderBrushProperty);
+        }
+
+        /// <summary>
+        /// Sets the border brush which will be used when an item is pressed by the left mouse button.
+        /// </summary>
+        [Category(AppName.MahApps)]
+        [AttachedPropertyBrowsableForType(typeof(ListBoxItem))]
+        [AttachedPropertyBrowsableForType(typeof(TreeViewItem))]
+        public static void SetMouseLeftButtonPressedBorderBrush(UIElement element, Brush? value)
+        {
+            element.SetValue(MouseLeftButtonPressedBorderBrushProperty, value);
+        }
+
+        /// <summary>
         /// Gets or sets the foreground brush which will be used when an item is pressed by the left mouse button.
         /// </summary>
         public static readonly DependencyProperty MouseLeftButtonPressedForegroundBrushProperty
@@ -517,7 +760,7 @@ namespace MahApps.Metro.Controls
                 element.MouseEnter -= OnLeftMouseEnter;
                 element.MouseLeave -= OnLeftMouseLeave;
 
-                if (e.NewValue is Brush || GetMouseLeftButtonPressedBackgroundBrush(element) != null)
+                if (e.NewValue is Brush || GetMouseLeftButtonPressedBackgroundBrush(element) != null || GetMouseLeftButtonPressedBorderBrush(element) != null)
                 {
                     element.PreviewMouseLeftButtonDown += OnPreviewMouseLeftButtonDown;
                     element.PreviewMouseLeftButtonUp += OnPreviewMouseLeftButtonUp;
@@ -571,16 +814,16 @@ namespace MahApps.Metro.Controls
                 "MouseRightButtonPressedBackgroundBrush",
                 typeof(Brush),
                 typeof(ItemHelper),
-                new FrameworkPropertyMetadata(default(Brush), FrameworkPropertyMetadataOptions.AffectsRender, OnMouseRightButtonPressedBackgroundBrushPropertyChanged));
+                new FrameworkPropertyMetadata(default(Brush), FrameworkPropertyMetadataOptions.AffectsRender, OnMouseRightButtonPressedPropertyChanged));
 
-        private static void OnMouseRightButtonPressedBackgroundBrushPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnMouseRightButtonPressedPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is UIElement element && e.OldValue != e.NewValue)
             {
                 element.PreviewMouseRightButtonDown -= OnPreviewMouseRightButtonDown;
                 element.PreviewMouseRightButtonUp -= OnPreviewMouseRightButtonUp;
 
-                if (e.NewValue is Brush || GetMouseRightButtonPressedForegroundBrush(element) != null)
+                if (e.NewValue is Brush || GetMouseRightButtonPressedForegroundBrush(element) != null || GetMouseRightButtonPressedBorderBrush(element) != null)
                 {
                     element.PreviewMouseRightButtonDown += OnPreviewMouseRightButtonDown;
                     element.PreviewMouseRightButtonUp += OnPreviewMouseRightButtonUp;
@@ -639,6 +882,53 @@ namespace MahApps.Metro.Controls
         }
 
         /// <summary>
+        /// Gets or sets the border brush which will be used when an item is pressed by the right mouse button.
+        /// </summary>
+        public static readonly DependencyProperty MouseRightButtonPressedBorderBrushProperty
+            = DependencyProperty.RegisterAttached(
+                "MouseRightButtonPressedBorderBrush",
+                typeof(Brush),
+                typeof(ItemHelper),
+                new FrameworkPropertyMetadata(default(Brush), FrameworkPropertyMetadataOptions.AffectsRender, OnMouseRightButtonPressedBorderPropertyChanged));
+
+        private static void OnMouseRightButtonPressedBorderPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is UIElement element && e.OldValue != e.NewValue)
+            {
+                element.PreviewMouseRightButtonDown -= OnPreviewMouseRightButtonDown;
+                element.PreviewMouseRightButtonUp -= OnPreviewMouseRightButtonUp;
+
+                if (e.NewValue is Brush || GetMouseRightButtonPressedForegroundBrush(element) != null || GetMouseRightButtonPressedBackgroundBrush(element) != null)
+                {
+                    element.PreviewMouseRightButtonDown += OnPreviewMouseRightButtonDown;
+                    element.PreviewMouseRightButtonUp += OnPreviewMouseRightButtonUp;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the border brush which will be used when an item is pressed by the right mouse button.
+        /// </summary>
+        [Category(AppName.MahApps)]
+        [AttachedPropertyBrowsableForType(typeof(ListBoxItem))]
+        [AttachedPropertyBrowsableForType(typeof(TreeViewItem))]
+        public static Brush? GetMouseRightButtonPressedBorderBrush(UIElement element)
+        {
+            return (Brush?)element.GetValue(MouseRightButtonPressedBorderBrushProperty);
+        }
+
+        /// <summary>
+        /// Sets the border brush which will be used when an item is pressed by the right mouse button.
+        /// </summary>
+        [Category(AppName.MahApps)]
+        [AttachedPropertyBrowsableForType(typeof(ListBoxItem))]
+        [AttachedPropertyBrowsableForType(typeof(TreeViewItem))]
+        public static void SetMouseRightButtonPressedBorderBrush(UIElement element, Brush? value)
+        {
+            element.SetValue(MouseRightButtonPressedBorderBrushProperty, value);
+        }
+
+        /// <summary>
         /// Gets or sets the foreground brush which will be used when an item is pressed by the right mouse button.
         /// </summary>
         public static readonly DependencyProperty MouseRightButtonPressedForegroundBrushProperty
@@ -655,7 +945,7 @@ namespace MahApps.Metro.Controls
                 element.PreviewMouseRightButtonDown -= OnPreviewMouseRightButtonDown;
                 element.PreviewMouseRightButtonUp -= OnPreviewMouseRightButtonUp;
 
-                if (e.NewValue is Brush || GetMouseRightButtonPressedBackgroundBrush(element) != null)
+                if (e.NewValue is Brush || GetMouseRightButtonPressedBackgroundBrush(element) != null || GetMouseRightButtonPressedBorderBrush(element) != null)
                 {
                     element.PreviewMouseRightButtonDown += OnPreviewMouseRightButtonDown;
                     element.PreviewMouseRightButtonUp += OnPreviewMouseRightButtonUp;
